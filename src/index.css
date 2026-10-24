@@ -1,0 +1,87 @@
+@media (max-width: 768px) {
+  .navbar {
+    grid-template-columns: 1fr auto;
+    gap: 15px;
+  }
+
+  .navbar nav {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .profile-icon {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .shelves-page {
+    flex-direction: column;
+  }
+
+  .page-heading {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  
+  .books {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 15px;
+  }
+
+  .book-card {
+    width: 145px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  .book-cover {
+    height: 155px;
+    background-color: #eeeeee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 45px;
+  }
+
+  .book-card h4 {
+    font-size: 14px;
+    margin: 10px 0 5px;
+  }
+
+  .book-card p {
+    font-size: 12px;
+    margin: 0 0 10px;
+  }
+
+  .book-card select {
+    width: 100%;
+    padding: 5px;
+    font-size: 11px;
+  }
+
+}
+
+.book-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.book-link:hover {
+  text-decoration: underline;
+}
+
+.navbar a.active {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.statistics-page {
+  padding: 30px 10px;
+}

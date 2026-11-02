@@ -1059,3 +1059,268 @@ body {
   }
 
 }
+
+.empty-state p {
+  margin: 8px 0;
+}
+
+
+
+.search-status {
+  width: 100%;
+  max-width: 100%;
+  margin: 35px 0;
+  padding: 42px 30px;
+  background: #f8f1e7;
+  border: 1px solid #d4bd97;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.16);
+}
+
+.search-status h3 {
+  font-family: Georgia, serif;
+  color: #24382b;
+  font-size: 25px;
+  margin: 12px 0;
+}
+
+.search-status p {
+  color: #6d655c;
+  font-size: 15px;
+  line-height: 1.7;
+  margin: 8px auto 0;
+  max-width: 430px;
+}
+
+.status-emoji {
+  display: block;
+  font-size: 43px;
+  margin-bottom: 12px;
+}
+
+/* Loading animation */
+
+.loading-spinner {
+  width: 38px;
+  height: 38px;
+  margin: 0 auto 20px;
+  border: 4px solid #e4d6c1;
+  border-top-color: #9a6a42;
+  border-radius: 50%;
+  animation: shelfSpin 0.8s linear infinite;
+}
+
+@keyframes shelfSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loading-spinner {
+    animation: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .search-status {
+    padding: 30px 20px;
+  }
+
+  .search-status h3 {
+    font-size: 22px;
+  }
+}
+
+
+
+
+.shelves-empty-message {
+  background: linear-gradient(135deg, #f5ecdc, #e6e5d8);
+  border: 1px solid #c6b59b;
+  border-radius: 20px;
+  padding: 35px 40px;
+  margin: 30px 0;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.shelves-empty-message h2 {
+  font-family: Georgia, serif;
+  color: #24382b;
+  font-size: 27px;
+  margin: 0 0 12px;
+}
+
+.shelves-empty-message p {
+  color: #645848;
+  font-size: 16px;
+  line-height: 1.7;
+  margin: 0 auto 22px;
+  max-width: 550px;
+}
+
+.shelves-empty-message a {
+  display: inline-block;
+  background: #2d4634;
+  color: #fff7e7;
+  padding: 13px 25px;
+  border-radius: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.shelves-empty-message a:hover {
+  background: #405e46;
+  color: white;
+  transform: translateY(-2px);
+}
+
+
+
+.shelf:has(.books:empty) {
+  min-height: 125px;
+  padding: 25px 35px;
+}
+
+.shelf:has(.books:empty) .books {
+  min-height: 0;
+}
+
+
+
+.shelf {
+  background: #e4e8dc;
+  border: 1px solid #bfc9b8;
+  border-radius: 20px;
+}
+
+.shelf h2 {
+  color: #24382b;
+}
+
+
+@media (max-width: 600px) {
+  .shelves-empty-message {
+    padding: 30px 20px;
+  }
+
+  .shelves-empty-message h2 {
+    font-size: 23px;
+  }
+
+  .shelf:has(.books:empty) {
+    padding: 22px 20px;
+  }
+}
+
+
+
+.shelves-container {
+  background: #f3ebdd;
+  border: 1px solid #d2c1a9;
+  border-radius: 22px;
+  padding: 30px;
+  margin-top: 25px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+
+.shelves-welcome {
+  text-align: center;
+  padding: 15px 20px 30px;
+}
+
+.shelves-welcome h2 {
+  font-family: Georgia, serif;
+  font-size: 27px;
+  color: #24382b;
+  margin: 0 0 12px;
+}
+
+.shelves-welcome p {
+  color: #645848;
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0 auto 22px;
+  max-width: 600px;
+}
+
+.shelves-welcome a {
+  display: inline-block;
+  background: #2d4634;
+  color: #fff7e7;
+  padding: 12px 24px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.shelves-welcome a:hover {
+  background: #405e46;
+  color: white;
+}
+
+.shelves-container .shelf {
+  background: #e2e8dd;
+  border: 1px solid #c8d0c0;
+  border-radius: 15px;
+  padding: 22px 25px;
+  margin-top: 15px;
+  box-shadow: none;
+  min-height: 0;
+}
+
+.shelves-container .shelf h2 {
+  color: #24382b;
+  font-size: 23px;
+  margin-bottom: 14px;
+}
+
+.shelves-container .books {
+  min-height: 0;
+}
+
+.empty-shelf-text {
+  color: #6d7469;
+  font-size: 14px;
+  font-style: italic;
+  margin: 4px 0;
+}
+
+
+@media (max-width: 600px) {
+  .shelves-container {
+    padding: 15px;
+  }
+
+  .shelves-welcome {
+    padding: 15px 10px 25px;
+  }
+
+  .shelves-welcome h2 {
+    font-size: 23px;
+  }
+
+  .shelves-container .shelf {
+    padding: 18px;
+  }
+}
+
+
+
+.shelves-welcome {
+  padding: 10px 20px 22px;
+}
+
+.shelves-welcome h2 {
+  font-size: 25px;
+  margin-bottom: 8px;
+}
+
+.shelves-welcome p {
+  margin-bottom: 16px;
+  line-height: 1.5;
+}

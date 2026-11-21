@@ -1,13 +1,14 @@
-
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { usePreferences } from "../context/usePreferences.js";
 import { searchBooks } from "../services/openLibrary.js";
 
 function Home({ query, setQuery, searchBy, setSearchBy }) {
+  const { preferences } = usePreferences();
+  const { name, genres } = preferences;
   const [shownBooks, setShownBooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [hasSearched, setHasSearched] = useState(false);
   const requestRef = useRef(0);
 
   function handleSearchChange(e) {
@@ -34,19 +35,21 @@ function Home({ query, setQuery, searchBy, setSearchBy }) {
       setShownBooks([]);
 
       try {
-        // Show fantasy books when the search box is empty.
-        const searchTerm = query.trim() || "fantasy";
-        const field = query.trim() ? searchBy : "subject";
+        let results;
 
-        const results = await searchBooks(
-          searchTerm,
-          field,
-          controller.signal
-        );
+        if (query.trim()) {
+          results = await searchBooks(query, searchBy, controller.signal);
+        } else if (genres.length > 0) {
+          // Search for books matching any of the saved genres in one request.
+          const genreQuery = genres.map((genre) => `subject:"${genre}"`).join(" OR ");
+          results = await searchBooks(genreQuery, "q", controller.signal);
+          results = results.slice(0, 21);
+        } else {
+          results = await searchBooks("fantasy", "subject", controller.signal);
+        }
 
-        if (requestId === requestRef.current) {
+        if (!controller.signal.aborted && requestId === requestRef.current) {
           setShownBooks(results);
-          setHasSearched(query.trim() !== "");
         }
       } catch (err) {
         if (
@@ -58,7 +61,7 @@ function Home({ query, setQuery, searchBy, setSearchBy }) {
           );
         }
       } finally {
-        if (requestId === requestRef.current) {
+        if (!controller.signal.aborted && requestId === requestRef.current) {
           setLoading(false);
         }
       }
@@ -73,13 +76,13 @@ function Home({ query, setQuery, searchBy, setSearchBy }) {
       clearTimeout(timer);
       controller.abort();
     };
-  }, [query, searchBy]);
+  }, [query, searchBy, genres]);
 
   return (
     <main className="home-page">
       <section className="home-intro">
         <div className="home-text">
-          <h1>Find your next great read</h1>
+          <h1>{name ? `Find your next great read, ${name}` : "Find your next great read"}</h1>
 
           <p>Search for books by title, author or subject</p>
 
@@ -88,6 +91,7 @@ function Home({ query, setQuery, searchBy, setSearchBy }) {
             value={query}
             onChange={handleSearchChange}
             placeholder="Search for a book..."
+            aria-label="Search for a book"
             className="search-input"
           />
 
@@ -117,7 +121,10 @@ function Home({ query, setQuery, searchBy, setSearchBy }) {
       </section>
 
       <section className="search-results">
-        <h2>Search Results</h2>
+        <h2>{query.trim() ? "Search Results" : genres.length > 0 ? "Recommended for You" : "Discover Books"}</h2>
+        {!query.trim() && genres.length > 0 && (
+          <p>Based on your favorite genres: <i>{genres.join(", ")}</i></p>
+        )}
 
         {/* Loading State */}
         {loading && (
@@ -143,14 +150,14 @@ function Home({ query, setQuery, searchBy, setSearchBy }) {
         {/* Empty State */}
         {!loading &&
           !error &&
-          hasSearched &&
           shownBooks.length === 0 && (
             <div className="search-status">
               <span className="status-emoji">🔎</span>
               <h3>No books found</h3>
               <p>
-                We couldn't find a match.
-                Try another title, author, or subject!
+                {query.trim()
+                  ? "Try another title, author, or subject!"
+                  : "Try a search or change your favorite genres in Preferences."}
               </p>
             </div>
           )}

@@ -1,62 +1,13 @@
-
 import { useState } from "react";
-
-const genreOptions = [
-  "Fantasy",
-  "Romance",
-  "Mystery",
-  "Science Fiction",
-  "Horror",
-  "Thriller",
-  "Historical Fiction",
-  "Contemporary Fiction"
-];
-
-function loadPreferences() {
-  try {
-    const saved = localStorage.getItem("shelflife-preferences");
-
-    if (!saved) {
-      return {
-        name: "",
-        genres: [],
-        readingGoal: ""
-      };
-    }
-
-    const data = JSON.parse(saved);
-
-    return {
-      name: typeof data.name === "string" ? data.name : "",
-      genres: Array.isArray(data.genres)
-        ? data.genres.filter((genre) =>
-            genreOptions.includes(genre)
-          )
-        : typeof data.genre === "string" &&
-            genreOptions.includes(data.genre)
-          ? [data.genre]
-          : [],
-      readingGoal:
-        data.readingGoal != null
-          ? String(data.readingGoal)
-          : ""
-    };
-  } catch {
-    return {
-      name: "",
-      genres: [],
-      readingGoal: ""
-    };
-  }
-}
+import { usePreferences } from "../context/usePreferences.js";
 
 function ReadingPreferences() {
-  const [initialPreferences] = useState(loadPreferences);
+  const { preferences, savePreferences, genreOptions } = usePreferences();
 
-  const [name, setName] = useState(initialPreferences.name);
-  const [genres, setGenres] = useState(initialPreferences.genres);
+  const [name, setName] = useState(preferences.name);
+  const [genres, setGenres] = useState(preferences.genres);
   const [readingGoal, setReadingGoal] = useState(
-    initialPreferences.readingGoal
+    String(preferences.readingGoal)
   );
 
   const [errors, setErrors] = useState({});
@@ -71,7 +22,8 @@ function ReadingPreferences() {
 
     setErrors((previous) => ({
       ...previous,
-      genres: ""
+      genres: "",
+      form: ""
     }));
 
     setSuccess("");
@@ -114,14 +66,11 @@ function ReadingPreferences() {
     }
 
     try {
-      localStorage.setItem(
-        "shelflife-preferences",
-        JSON.stringify({
-          name: name.trim(),
-          genres,
-          readingGoal: goalNumber
-        })
-      );
+      savePreferences({
+        name: name.trim(),
+        genres,
+        readingGoal: goalNumber
+      });
 
       setSuccess("Your reading preferences have been saved!");
     } catch {
@@ -135,7 +84,7 @@ function ReadingPreferences() {
   return (
     <main className="preferences-page">
       <h1>Reading Preferences</h1>
-      <p>Personalize your ShelfLife experience.</p>
+      <p>Choose your favorite genres to personalize your book recommendations and set a reading goal.</p>
 
       <form onSubmit={handleSubmit} noValidate>
         <div className="form-field">
@@ -149,7 +98,7 @@ function ReadingPreferences() {
             value={name}
             onChange={(e) => {
               setName(e.target.value);
-              setErrors((prev) => ({ ...prev, name: "" }));
+              setErrors((prev) => ({ ...prev, name: "", form: "" }));
               setSuccess("");
             }}
             placeholder="Enter your name"
@@ -188,7 +137,7 @@ function ReadingPreferences() {
 
         <div className="form-field">
           <label htmlFor="reading-goal">
-            Annual Reading Goal
+            Reading Goal
           </label>
 
           <input
@@ -199,7 +148,8 @@ function ReadingPreferences() {
               setReadingGoal(e.target.value);
               setErrors((prev) => ({
                 ...prev,
-                readingGoal: ""
+                readingGoal: "",
+                form: ""
               }));
               setSuccess("");
             }}

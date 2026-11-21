@@ -4,7 +4,6 @@
 
 body {
   margin: 0;
-  background-color: #f4efe6;
   font-family: "Segoe UI", Arial, sans-serif;
 }
 
@@ -19,7 +18,6 @@ body {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  border-bottom: 1px solid #ddd2c3;
 }
 
 .navbar h2 {
@@ -36,28 +34,11 @@ body {
 .navbar a {
   font-weight: 500;
   text-decoration: none;
-  padding-bottom: 8px;
   transition: color 0.2s ease;
 }
 
-.navbar a:hover {
-  color: #9a6a42;
-}
-
 .navbar a.active {
-  color: #1c2d22;
   font-weight: 700;
-}
-
-.profile-icon {
-  justify-self: end;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 24px;
 }
 
 .home-page {
@@ -143,7 +124,6 @@ body {
 .search-results h2 {
   font-family: Georgia, serif;
   font-size: 34px;
-  color: #1c2d22;
   margin-bottom: 25px;
 }
 
@@ -156,11 +136,8 @@ body {
 
 .result-card {
   min-width: 0;
-  background: #fffaf3;
-  border: 1px solid #ddd2c3;
   border-radius: 16px;
   padding: 14px;
-  box-shadow: 0 4px 16px rgba(28, 45, 34, 0.06);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -172,7 +149,6 @@ body {
 
 .result-cover {
   height: 205px;
-  background: linear-gradient(145deg, #dde4d7, #efe1cc);
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -182,14 +158,12 @@ body {
 
 .result-card h3 {
   font-family: Georgia, serif;
-  color: #1c2d22;
   font-size: 17px;
   line-height: 1.4;
   margin: 16px 0 8px;
 }
 
 .result-card p {
-  color: #6d655c;
   font-size: 13px;
   line-height: 1.5;
   margin: 5px 0;
@@ -226,18 +200,15 @@ body {
 
 .page-heading h1 {
   font-family: Georgia, serif;
-  color: #1c2d22;
   font-size: 42px;
   margin: 0 0 12px;
 }
 
 .page-heading p {
-  color: #6d655c;
   margin: 0;
 }
 
 .page-heading button {
-  background: #2d4634;
   color: white;
   border: 1px solid transparent;
   border-radius: 12px;
@@ -249,7 +220,6 @@ body {
 }
 
 .page-heading button:hover {
-  background: #1c2d22;
   transform: translateY(-1px);
 }
 
@@ -273,15 +243,12 @@ body {
   width: 180px;
   flex-shrink: 0;
   padding: 12px;
-  background: #fffaf3;
-  border: 1px solid #ddd2c3;
   border-radius: 14px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .book-cover {
   height: 200px;
-  background: linear-gradient(145deg, #dde4d7, #efe1cc);
   border-radius: 9px;
   display: flex;
   align-items: center;
@@ -291,14 +258,12 @@ body {
 
 .book-card h4 {
   font-family: Georgia, serif;
-  color: #1c2d22;
   font-size: 16px;
   line-height: 1.4;
   margin: 12px 0 6px;
 }
 
 .book-card p {
-  color: #6d655c;
   font-size: 13px;
   line-height: 1.5;
   margin: 0 0 12px;
@@ -310,8 +275,6 @@ body {
   font-size: 12px;
   border: 1px solid #ddd2c3;
   border-radius: 9px;
-  background: #fffdf9;
-  color: #2a241d;
   cursor: pointer;
 }
 
@@ -360,7 +323,6 @@ body {
 
 .details-text h1 {
   font-family: Georgia, serif;
-  color: #1c2d22;
   font-size: 34px;
   margin-top: 0;
 }
@@ -368,11 +330,6 @@ body {
 .details-text h2 {
   font-size: 20px;
   font-weight: normal;
-}
-
-.details-text p {
-  color: #6d655c;
-  line-height: 1.8;
 }
 
 .details-shelf {
@@ -383,7 +340,6 @@ body {
 .details-shelf label {
   display: block;
   margin-bottom: 10px;
-  color: #1c2d22;
   font-weight: 600;
 }
 
@@ -392,8 +348,6 @@ body {
   padding: 12px;
   border: 1px solid #ddd2c3;
   border-radius: 9px;
-  background: #fffaf3;
-  color: #2a241d;
   cursor: pointer;
 }
 
@@ -406,16 +360,10 @@ body {
 .book-details-right h2,
 .book-details-right h3 {
   font-family: Georgia, serif;
-  color: #1c2d22;
 }
 
 .book-details-right h2 {
   margin-top: 0;
-}
-
-.book-details-right p {
-  color: #6d655c;
-  line-height: 1.8;
 }
 
 .popup-overlay {
@@ -502,7 +450,6 @@ body {
 }
 
 .form-buttons button[type="submit"] {
-  background: #2d4634;
   color: white;
 }
 
@@ -522,12 +469,10 @@ body {
 .statistics-page h1 {
   font-family: Georgia, serif;
   font-size: 42px;
-  color: #1c2d22;
   margin-bottom: 10px;
 }
 
 .statistics-page > p {
-  color: #6d655c;
   margin-bottom: 30px;
 }
 
@@ -539,16 +484,12 @@ body {
 }
 
 .stats-summary .stat-box {
-  background: #fffdf9;
-  border: 1px solid #ddd2c3;
   border-radius: 18px;
   padding: 30px;
-  box-shadow: 0 5px 20px rgba(28, 45, 34, 0.06);
 }
 
 .stats-summary .stat-box h2 {
   font-family: Georgia, serif;
-  color: #1c2d22;
   font-size: 19px;
   margin: 0 0 15px;
 }
@@ -566,16 +507,12 @@ body {
 }
 
 .stats-charts .stat-box {
-  background: #fffdf9;
-  border: 1px solid #ddd2c3;
   border-radius: 18px;
   padding: 30px;
-  box-shadow: 0 5px 20px rgba(28, 45, 34, 0.06);
 }
 
 .stats-charts .stat-box h2 {
   font-family: Georgia, serif;
-  color: #1c2d22;
   font-size: 22px;
   margin: 0 0 28px;
 }
@@ -589,7 +526,6 @@ body {
   justify-content: space-between;
   gap: 15px;
   margin-bottom: 9px;
-  color: #2a241d;
   font-size: 14px;
 }
 
@@ -607,7 +543,6 @@ body {
 }
 
 @media (max-width: 768px) {
-
   .app {
     padding: 0 18px 35px;
   }
@@ -622,11 +557,6 @@ body {
     grid-row: 2;
     flex-wrap: wrap;
     justify-content: center;
-  }
-
-  .profile-icon {
-    grid-column: 2;
-    grid-row: 1;
   }
 
   .home-intro {
@@ -667,11 +597,9 @@ body {
   .statistics-page {
     padding: 30px 5px;
   }
-
 }
 
 @media (max-width: 500px) {
-
   .navbar h2 {
     font-size: 28px;
   }
@@ -731,11 +659,9 @@ body {
   .stats-charts .stat-box {
     padding: 20px;
   }
-
 }
 
 @media (max-width: 360px) {
-
   .result-books {
     grid-template-columns: 1fr;
   }
@@ -747,7 +673,6 @@ body {
   .home-text h1 {
     font-size: 30px;
   }
-
 }
 
 body {
@@ -788,11 +713,6 @@ body {
   border-bottom: 2px solid #c6b98b;
 }
 
-.profile-icon {
-  background: rgba(250, 255, 243, 0.541);
-  border: 1px solid rgba(223, 232, 209, 0.2);
-}
-
 .search-results h2,
 .page-heading h1,
 .statistics-page h1 {
@@ -805,14 +725,10 @@ body {
 }
 
 .shelf {
-  background: #dce2d4;
-  border: 1px solid #aebcab;
-  border-radius: 18px;
   box-shadow: 0 10px 28px rgba(8, 23, 16, 0.13);
 }
 
 .shelf h2 {
-  color: #253d32;
   font-family: Georgia, serif;
   font-size: 25px;
   font-weight: 700;
@@ -973,7 +889,6 @@ body {
 }
 
 @media (max-width: 768px) {
-
   .navbar {
     padding: 18px 20px;
   }
@@ -990,7 +905,6 @@ body {
     border-left: none;
     border-top: 1px solid #b5c4b2;
   }
-
 }
 
 .book-details-layout {
@@ -1049,7 +963,6 @@ body {
 }
 
 @media (max-width: 768px) {
-
   .book-details-layout {
     gap: 28px;
   }
@@ -1057,14 +970,11 @@ body {
   .book-details-right {
     width: 100%;
   }
-
 }
 
 .empty-state p {
   margin: 8px 0;
 }
-
-
 
 .search-status {
   width: 100%;
@@ -1133,9 +1043,6 @@ body {
   }
 }
 
-
-
-
 .shelves-empty-message {
   background: linear-gradient(135deg, #f5ecdc, #e6e5d8);
   border: 1px solid #c6b59b;
@@ -1178,8 +1085,6 @@ body {
   transform: translateY(-2px);
 }
 
-
-
 .shelf:has(.books:empty) {
   min-height: 125px;
   padding: 25px 35px;
@@ -1188,8 +1093,6 @@ body {
 .shelf:has(.books:empty) .books {
   min-height: 0;
 }
-
-
 
 .shelf {
   background: #e4e8dc;
@@ -1200,7 +1103,6 @@ body {
 .shelf h2 {
   color: #24382b;
 }
-
 
 @media (max-width: 600px) {
   .shelves-empty-message {
@@ -1216,8 +1118,6 @@ body {
   }
 }
 
-
-
 .shelves-container {
   background: #f3ebdd;
   border: 1px solid #d2c1a9;
@@ -1227,15 +1127,12 @@ body {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
-
 .shelves-welcome {
   text-align: center;
-  padding: 15px 20px 30px;
 }
 
 .shelves-welcome h2 {
   font-family: Georgia, serif;
-  font-size: 27px;
   color: #24382b;
   margin: 0 0 12px;
 }
@@ -1243,7 +1140,6 @@ body {
 .shelves-welcome p {
   color: #645848;
   font-size: 15px;
-  line-height: 1.6;
   margin: 0 auto 22px;
   max-width: 600px;
 }
@@ -1290,7 +1186,6 @@ body {
   margin: 4px 0;
 }
 
-
 @media (max-width: 600px) {
   .shelves-container {
     padding: 15px;
@@ -1309,8 +1204,6 @@ body {
   }
 }
 
-
-
 .shelves-welcome {
   padding: 10px 20px 22px;
 }
@@ -1324,7 +1217,6 @@ body {
   margin-bottom: 16px;
   line-height: 1.5;
 }
-
 
 /* READING PREFERENCES */
 
@@ -1456,13 +1348,12 @@ body {
   }
 }
 
-
-/* ANNUAL READING GOAL CARD */
+/* READING GOAL CARD */
 
 .statistics-page .reading-goal-card {
   box-sizing: border-box;
   width: 100%;
-  margin-top: 30px;
+  margin: 0 0 30px;
   padding: 30px 32px;
 
   background: #dfe6d9;
@@ -1507,8 +1398,10 @@ body {
   transition: width 0.3s ease;
 }
 
-.navbar-brand {
+.navbar .navbar-brand {
   display: flex;
+  justify-self: start;
+  padding: 0;
   align-items: center;
   gap: 10px;
   cursor: pointer;
@@ -1518,4 +1411,8 @@ body {
   width: 38px;
   height: 38px;
   object-fit: contain;
+}
+.navbar-brand:focus-visible {
+  outline: 2px solid #f3e9d7;
+  outline-offset: 4px;
 }

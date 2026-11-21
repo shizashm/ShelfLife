@@ -1,25 +1,35 @@
 
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { getBookDetails } from "../services/openLibrary.js";
+import {
+  useLocation,
+  useNavigate,
+  useParams
+} from "react-router-dom";
 
-function BookDetails({ books, onMove }) {
+import { getBookDetails } from "../services/openLibrary.js";
+import { useBooks } from "../context/useBooks.js";
+
+function BookDetails() {
   const navigate = useNavigate();
   const location = useLocation();
   const { id } = useParams();
 
-  const savedBook = books.find((item) => String(item.id) === id);
+  const { books, handleMove } = useBooks();
+
+  const savedBook = books.find(
+    (item) => String(item.id) === id
+  );
+
   const linkedBook = location.state?.book;
 
-  // Only use navigation state when it matches the requested work ID.
-  const book = savedBook || (linkedBook?.id === id ? linkedBook : null);
+  const book = savedBook ||
+    (linkedBook?.id === id ? linkedBook : null);
 
   const [extra, setExtra] = useState(null);
   const [detailsError, setDetailsError] = useState("");
   const [detailsLoading, setDetailsLoading] = useState(false);
 
   useEffect(() => {
-    // Only Open Library works can be looked up at the Works endpoint.
     if (!id?.startsWith("/works/")) return;
 
     const controller = new AbortController();
@@ -31,14 +41,19 @@ function BookDetails({ books, onMove }) {
       setExtra(null);
 
       try {
-        const details = await getBookDetails(id, controller.signal);
+        const details = await getBookDetails(
+          id,
+          controller.signal
+        );
 
         if (active) {
           setExtra(details);
         }
       } catch (err) {
         if (active && err.name !== "AbortError") {
-          setDetailsError("Could not load the additional book details.");
+          setDetailsError(
+            "Could not load the additional book details."
+          );
         }
       } finally {
         if (active) {
@@ -77,7 +92,6 @@ function BookDetails({ books, onMove }) {
     ? extra.subjects
     : (book.subjects || []);
 
-  // Remove series tags, duplicates, and empty subjects.
   const cleanedSubjects = [...new Set(subjects)]
     .filter(
       (subject) =>
@@ -161,7 +175,10 @@ function BookDetails({ books, onMove }) {
               id="details-shelf-select"
               value={savedShelf}
               onChange={(e) =>
-                onMove({ ...book, ...extra }, e.target.value)
+                handleMove(
+                  { ...book, ...extra },
+                  e.target.value
+                )
               }
             >
               <option value="none">Not on a shelf</option>
@@ -189,7 +206,6 @@ function BookDetails({ books, onMove }) {
 
           <div className="edition-note">
             <h3>Other Editions</h3>
-
             <p>
               {book.editions
                 ? `${book.editions} editions listed`

@@ -1,5 +1,13 @@
 import { useState } from "react";
-import { Routes, Route, NavLink, Navigate, useNavigate } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  NavLink,
+  Navigate,
+  useNavigate
+} from "react-router-dom";
+import ReadingPreferences from "./pages/ReadingPreferences.jsx";
+
 import BookDetails from "./pages/BookDetails.jsx";
 import Home from "./pages/Home.jsx";
 import MyShelves from "./pages/MyShelves.jsx";
@@ -7,10 +15,9 @@ import Statistics from "./pages/Statistics.jsx";
 import "./App.css";
 
 function App() {
-  // The shelves start empty. Books are added from live Open Library results.
-  const [books, setBooks] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchBy, setSearchBy] = useState("title");
+
   const navigate = useNavigate();
 
   function handleLogoClick() {
@@ -19,45 +26,27 @@ function App() {
     navigate("/");
   }
 
-  function handleMove(book, newShelf) {
-    setBooks((previous) => {
-      // Removing a book from the shelves is different from searching for it.
-      if (newShelf === "none") {
-        return previous.filter((item) => item.id !== book.id);
-      }
-
-      const exists = previous.some((item) => item.id === book.id);
-      if (exists) {
-        return previous.map((item) =>
-          item.id === book.id ? { ...item, shelf: newShelf } : item
-        );
-      }
-      return [...previous, { ...book, shelf: newShelf }];
-    });
-  }
-
-  function handleDelete(id) {
-    setBooks((previous) => previous.filter((book) => book.id !== id));
-  }
-
   return (
     <div className="app">
       <header className="navbar">
-        <h2
-          onClick={handleLogoClick}
-          style={{ cursor: "pointer" }}
-        >
-          ShelfLife
-        </h2>
+        <div className="navbar-brand" onClick={handleLogoClick}>
+          <img src="/shelflife-icon.png" alt="" className="brand-icon" />
+          <h2>ShelfLife</h2>
+        </div>
+
         <nav>
           <NavLink to="/">Search</NavLink>
           <NavLink to="/shelves">My Shelves</NavLink>
           <NavLink to="/statistics">Statistics</NavLink>
+          <NavLink to="/preferences">Preferences</NavLink>
         </nav>
-        <div className="profile-icon"><span>👤</span></div>
+
+        <div className="profile-icon">
+          <span>👤</span>
+        </div>
       </header>
 
-      <Routes>    
+      <Routes>
         <Route
           path="/"
           element={
@@ -69,10 +58,31 @@ function App() {
             />
           }
         />
-        <Route path="/books/:id" element={<BookDetails books={books} onMove={handleMove} />} />
-        <Route path="/shelves" element={<MyShelves books={books} onMove={handleMove} onDelete={handleDelete} />} />
-        <Route path="/statistics" element={<Statistics books={books} />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
+
+        <Route
+          path="/books/:id"
+          element={<BookDetails />}
+        />
+
+        <Route
+          path="/shelves"
+          element={<MyShelves />}
+        />
+
+        <Route
+          path="/statistics"
+          element={<Statistics />}
+        />
+
+        <Route
+          path="*"
+          element={<Navigate to="/" replace />}
+        />
+
+        <Route
+          path="/preferences"
+          element={<ReadingPreferences />}
+        />
       </Routes>
     </div>
   );

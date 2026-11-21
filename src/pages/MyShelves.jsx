@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
+import { useBooks } from "../context/useBooks.js";
 import BookCard from "../components/BookCard.jsx";
 
-function MyShelves({ books, onMove, onDelete }) {
+function MyShelves() {
+  const { books } = useBooks();
+
   const shelves = [
     { id: "want", title: "Want to Read" },
     { id: "reading", title: "Currently Reading" },
@@ -19,11 +22,11 @@ function MyShelves({ books, onMove, onDelete }) {
         </div>
 
         <div className="shelves-container">
-          
           <div className="shelves-welcome">
             {books.length === 0 ? (
               <>
                 <h2>📚 Your reading journey starts here</h2>
+
                 <p>
                   Your shelves are waiting for their first story.
                   Explore books and start building your personal library.
@@ -32,16 +35,18 @@ function MyShelves({ books, onMove, onDelete }) {
             ) : (
               <>
                 <h2>📚 Your library is growing!</h2>
+
                 <p>
-                  You have {books.length} {books.length === 1 ? "book" : "books"} in
-                  your library. Keep discovering stories and adding them to your shelves.
+                  You have {books.length}{" "}
+                  {books.length === 1 ? "book" : "books"} in
+                  your library. Keep discovering stories and
+                  adding them to your shelves.
                 </p>
               </>
             )}
 
             <Link to="/">Explore Books</Link>
           </div>
-
 
           {shelves.map((shelf) => {
             const shelfBooks = books.filter(
@@ -50,18 +55,19 @@ function MyShelves({ books, onMove, onDelete }) {
 
             return (
               <section className="shelf" key={shelf.id}>
-                <h2>{shelf.title} ({shelfBooks.length})</h2>
+                <h2>
+                  {shelf.title} ({shelfBooks.length})
+                </h2>
 
                 <div className="books">
-                  {shelfBooks.length > 0 ? (
-                    shelfBooks.map((book) => (
-                      <BookCard
-                        key={book.id}
-                        book={book}
-                        onMove={onMove}
-                        onDelete={onDelete}
-                      />
-                    ))
+                  {shelfBooks.length > 0 ? (   
+                  shelfBooks.map((book) => (
+                    <BookCard
+                      key={book.id}
+                      book={book}
+                    />
+                  ))
+
                   ) : (
                     <p className="empty-shelf-text">
                       No books on this shelf yet.

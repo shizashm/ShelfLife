@@ -1,6 +1,10 @@
-import { Link } from "react-router-dom";
 
-function BookCard({ book, onMove, onDelete }) {
+import { Link } from "react-router-dom";
+import { useBooks } from "../context/useBooks.js";
+
+function BookCard({ book }) {
+  const { handleMove, handleDelete } = useBooks();
+
   return (
     <div className="book-card">
       <Link
@@ -13,12 +17,18 @@ function BookCard({ book, onMove, onDelete }) {
             <img
               src={`https://covers.openlibrary.org/b/id/${book.coverId}-M.jpg`}
               alt={`Cover of ${book.title}`}
-              style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "9px" }}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                borderRadius: "9px"
+              }}
             />
           ) : (
             <span>📖</span>
           )}
         </div>
+
         <h4>{book.title}</h4>
       </Link>
 
@@ -27,16 +37,17 @@ function BookCard({ book, onMove, onDelete }) {
         className="delete-book-btn"
         title="Remove from My Shelves"
         aria-label={`Remove ${book.title} from My Shelves`}
-        onClick={() => onDelete(book.id)}
+        onClick={() => handleDelete(book.id)}
       >
         ✘
       </button>
 
       <p>{book.author}</p>
+
       <select
         aria-label={`Shelf for ${book.title}`}
         value={book.shelf}
-        onChange={(e) => onMove(book, e.target.value)}
+        onChange={(e) => handleMove(book, e.target.value)}
       >
         <option value="want">Want to Read</option>
         <option value="reading">Currently Reading</option>

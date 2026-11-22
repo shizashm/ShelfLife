@@ -1,16 +1,97 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# ShelfLife
 
-Currently, two official plugins are available:
+## Project Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+ShelfLife is a web application designed to help readers discover books, organize their personal bookshelves, track their reading progress, and receive personalized book recommendations based on their reading preferences.
 
-## React Compiler
+This application was developed as part of the ISTE 340 Client Programming group project.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
 
-## Expanding the ESLint configuration
+- Search for books by title, author, or subject.
+- View book information and descriptions using the Open Library API.
+- Organize books into personal reading shelves.
+- View reading statistics and track reading goals.
+- Set reading preferences and receive personalized book recommendations.
+- Save books and reading preferences using localStorage.
+- Responsive layouts for desktop, tablet, and mobile devices.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Technologies Used
+
+- React
+- Vite
+- JavaScript
+- HTML and CSS
+- React Router
+- React Context API
+- Open Library API
+- localStorage
+
+## Prerequisites
+
+Before running the application, make sure to have:
+
+- Node.js (22.12 or later in the Node 22 series recommended)
+- npm
+- A web browser
+- An active internet connection for fetching book data
+
+## Installation and Setup
+
+1. Download and extract the project folder.
+2. Open the ShelfLife project folder in Visual Studio Code.
+3. Open the terminal and install the required dependencies:
+
+   ```bash
+   npm install
+   ```
+
+4. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+5. Open the local URL displayed in the terminal in your browser.
+
+## API Information
+
+ShelfLife uses the public Open Library API to retrieve book information, covers, descriptions, and search results.
+
+API website: https://openlibrary.org/
+
+No API key or environment variables are required to run the application.
+
+## Data Persistence
+
+The application uses localStorage to save the user's books, shelf selections, reading preferences, and reading goals. This allows the saved information to remain available after refreshing or reopening the website.
+
+## Testing and Production Build
+
+To check the code for linting errors:
+
+```bash
+npm run lint
+```
+
+To create a production build:
+
+```bash
+npm run build
+```
+
+To preview the production build:
+
+```bash
+npm run preview
+```
+
+## Team
+
+Team 6 - Papercut
+
+Shiza Shaheem
+Sandhli Arora
+Shaik Nadia Tabassum
+

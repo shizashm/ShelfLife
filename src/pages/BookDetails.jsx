@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import {
   useLocation,
@@ -6,7 +5,7 @@ import {
   useParams
 } from "react-router-dom";
 
-import { getBookDetails } from "../services/openLibrary.js";
+import { getBookDetails, getAuthorName } from "../services/openLibrary.js";
 import { useBooks } from "../context/useBooks.js";
 
 function BookDetails() {
@@ -20,17 +19,23 @@ function BookDetails() {
     (item) => String(item.id) === id
   );
 
+
   const linkedBook = location.state?.book;
 
+  const [fetchedBook, setFetchedBook] = useState(null);
+
   const book = savedBook ||
-    (linkedBook?.id === id ? linkedBook : null);
+    (linkedBook?.id === id ? linkedBook : null) ||
+    (fetchedBook?.id === id ? fetchedBook : null);
 
   const [extra, setExtra] = useState(null);
   const [detailsError, setDetailsError] = useState("");
-  const [detailsLoading, setDetailsLoading] = useState(false);
+  const [detailsLoading, setDetailsLoading] = useState(true);
 
+
+ 
   useEffect(() => {
-    if (!id?.startsWith("/works/")) return;
+    if (!id) return;
 
     const controller = new AbortController();
     let active = true;
@@ -39,6 +44,7 @@ function BookDetails() {
       setDetailsLoading(true);
       setDetailsError("");
       setExtra(null);
+      setFetchedBook(null);
 
       try {
         const details = await getBookDetails(
@@ -49,10 +55,31 @@ function BookDetails() {
         if (active) {
           setExtra(details);
         }
+
+        if (!savedBook && linkedBook?.id !== id) {
+          const author = await getAuthorName(
+            details.authorKey,
+            controller.signal
+          );
+
+          if (active) {
+            setFetchedBook({
+              id,
+              title: details.title,
+              author,
+              year: details.year,
+              coverId: details.coverId,
+              subjects: details.subjects,
+              description: details.description,
+              editions: 0,
+              shelf: "none"
+            });
+          }
+        }
       } catch (err) {
         if (active && err.name !== "AbortError") {
           setDetailsError(
-            "Could not load the additional book details."
+            "Could not load the book details. Please try again later."
           );
         }
       } finally {
@@ -68,8 +95,10 @@ function BookDetails() {
       active = false;
       controller.abort();
     };
-  }, [id]);
+  }, [id, savedBook, linkedBook]);
 
+
+  
   if (!book) {
     return (
       <main className="book-details-page">
@@ -81,12 +110,15 @@ function BookDetails() {
         </button>
 
         <p>
-          Book information isn't available here.
-          Open the book from Search again.
+          {detailsLoading
+            ? "Loading book information..."
+            : detailsError ||
+              "Book information isn't available here. Open the book from Search again."}
         </p>
       </main>
     );
   }
+
 
   const subjects = extra?.subjects?.length
     ? extra.subjects

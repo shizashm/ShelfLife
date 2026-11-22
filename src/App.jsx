@@ -4,7 +4,7 @@ import {
   Route,
   NavLink,
   Navigate,
-  useNavigate
+  Link
 } from "react-router-dom";
 import ReadingPreferences from "./pages/ReadingPreferences.jsx";
 
@@ -18,21 +18,18 @@ function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchBy, setSearchBy] = useState("title");
 
-  const navigate = useNavigate();
-
   function handleLogoClick() {
     setSearchQuery("");
     setSearchBy("title");
-    navigate("/");
   }
 
   return (
     <div className="app">
       <header className="navbar">
-        <div className="navbar-brand" onClick={handleLogoClick}>
+        <Link to="/" className="navbar-brand" onClick={handleLogoClick}>
           <img src="/shelflife-icon.png" alt="" className="brand-icon" />
           <h2>ShelfLife</h2>
-        </div>
+        </Link>
 
         <nav>
           <NavLink to="/">Search</NavLink>
@@ -41,9 +38,6 @@ function App() {
           <NavLink to="/preferences">Preferences</NavLink>
         </nav>
 
-        <div className="profile-icon">
-          <span>👤</span>
-        </div>
       </header>
 
       <Routes>

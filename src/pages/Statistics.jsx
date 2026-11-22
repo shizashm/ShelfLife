@@ -1,27 +1,11 @@
-
-import { useState } from "react";
 import { useBooks } from "../context/useBooks.js";
+
+import { usePreferences } from "../context/usePreferences.js";
 
 function Statistics() {
   const { books } = useBooks();
-
-  // Load saved reading goal from Preferences
-  const [readingGoal] = useState(() => {
-    try {
-      const saved = localStorage.getItem("shelflife-preferences");
-
-      if (!saved) return 0;
-
-      const preferences = JSON.parse(saved);
-      const goal = Number(preferences.readingGoal);
-
-      return Number.isInteger(goal) && goal > 0
-        ? goal
-        : 0;
-    } catch {
-      return 0;
-    }
-  });
+  const { preferences } = usePreferences();
+  const readingGoal = Number(preferences.readingGoal);
 
   // Get all saved books
   const savedBooks = books.filter(
@@ -43,7 +27,7 @@ function Statistics() {
 
   const totalBooks = savedBooks.length;
 
-  // Calculate annual reading goal progress
+  // Calculate reading goal progress
   const goalProgress =
     readingGoal > 0
       ? Math.min((finishedCount / readingGoal) * 100, 100)
@@ -82,6 +66,34 @@ function Statistics() {
     <main className="statistics-page">
       <h1>Reading Statistics</h1>
       <p>Track your reading journey</p>
+
+      {/* Reading Goal */}
+      <section className="reading-goal-card">
+        <h2>Reading Goal</h2>
+
+        {readingGoal > 0 ? (
+          <>
+            <p>
+              <strong>{finishedCount}</strong> / {readingGoal} books finished
+            </p>
+
+            <div className="reading-goal-track">
+              <div
+                className="reading-goal-fill"
+                style={{ width: `${goalProgress}%` }}
+              ></div>
+            </div>
+
+            <p>
+              {Math.round(goalProgress)}% of your goal completed
+            </p>
+          </>
+        ) : (
+          <p>
+            No reading goal set yet. Visit Preferences to set one!
+          </p>
+        )}
+      </section>
 
       {/* Summary cards */}
       <div className="stats-summary">
@@ -148,34 +160,6 @@ function Statistics() {
           ))}
         </section>
       </div>
-
-      {/* Annual Reading Goal */}
-      <section className="reading-goal-card">
-        <h2>Annual Reading Goal</h2>
-
-        {readingGoal > 0 ? (
-          <>
-            <p>
-              <strong>{finishedCount}</strong> / {readingGoal} books finished
-            </p>
-
-            <div className="reading-goal-track">
-              <div
-                className="reading-goal-fill"
-                style={{ width: `${goalProgress}%` }}
-              ></div>
-            </div>
-
-            <p>
-              {Math.round(goalProgress)}% of your goal completed
-            </p>
-          </>
-        ) : (
-          <p>
-            No reading goal set yet. Visit Preferences to set one!
-          </p>
-        )}
-      </section>
     </main>
   );
 }

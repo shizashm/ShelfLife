@@ -206,12 +206,20 @@ function BookDetails() {
             <select
               id="details-shelf-select"
               value={savedShelf}
+            
               onChange={(e) =>
                 handleMove(
-                  { ...book, ...extra },
+                  {
+                    ...book,
+                    description: extra?.description || book.description,
+                    subjects: extra?.subjects?.length
+                      ? extra.subjects
+                      : book.subjects
+                  },
                   e.target.value
                 )
               }
+
             >
               <option value="none">Not on a shelf</option>
               <option value="want">Want to Read</option>
